@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
 
-import Categories from "./src/screens/Categories";
+import RecipesNavigator from "./src/navigation/RecipesNavigator";
 
-import { loadFont } from "./src/utils/loadFonts";
+import { loadFonts } from "./src/utils/loadFonts";
+
+const loadAssets = (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    Promise.all([loadFonts])
+      .then(() => resolve())
+      .catch(() => reject());
+  });
+};
 
 const App: React.FC = () => {
   const [isLoading, setLoadingState] = useState(true);
@@ -12,26 +19,13 @@ const App: React.FC = () => {
   if (isLoading) {
     return (
       <AppLoading
-        startAsync={loadFont}
+        startAsync={loadAssets}
         onFinish={() => setLoadingState(false)}
       />
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <Categories />
-    </View>
-  );
+  return <RecipesNavigator />;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 export default App;
