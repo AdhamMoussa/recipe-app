@@ -1,21 +1,36 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableHighlight, FlatList } from "react-native";
 import { NavigationStackScreenComponent } from "react-navigation-stack";
-import { CATEGORIES } from "../data/dummy-data";
+
+import RecipeItem from "../components/RecipeItem";
+
+import { CATEGORIES, RECIPES } from "../data/dummy-data";
+import { Recipe } from "../models/recipe";
 
 const CategoryRecipes: NavigationStackScreenComponent = props => {
   const { navigation } = props;
 
+  const categoryId: string = navigation.getParam("categoryId");
+
+  const recipes = RECIPES.filter(recipe =>
+    recipe.categoryIds.includes(categoryId)
+  );
+
+  const navigateToRecipe = (recipe: Recipe): void => {
+    navigation.navigate({
+      routeName: "Recipe",
+      params: { recipe }
+    });
+  };
+
   return (
     <View>
-      <Text>Category Recipes screen</Text>
-      <Button
-        title="go to recipe"
-        onPress={() => {
-          navigation.navigate({
-            routeName: "Recipe"
-          });
-        }}
+      <FlatList
+        data={recipes}
+        keyExtractor={({ id }) => id}
+        renderItem={({ item }) => (
+          <RecipeItem recipe={item} navigateToRecipe={navigateToRecipe} />
+        )}
       />
     </View>
   );

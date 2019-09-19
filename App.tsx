@@ -10,11 +10,7 @@ import { defaultTheme } from "./src/utils/theme";
 useScreens();
 
 const loadAssets = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    Promise.all([loadFonts])
-      .then(() => resolve())
-      .catch(() => reject());
-  });
+  return loadFonts();
 };
 
 const App: React.FC = () => {

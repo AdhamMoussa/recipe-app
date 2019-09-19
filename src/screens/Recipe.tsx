@@ -1,21 +1,31 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { Text } from "react-native";
 import { NavigationStackScreenComponent } from "react-navigation-stack";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-const Recipe: NavigationStackScreenComponent = props => {
+import CustomHeaderButton from "../components/CustomHeaderButton";
+
+import { Recipe } from "../models/recipe";
+
+const RecipeScreen: NavigationStackScreenComponent = props => {
   const { navigation } = props;
 
-  return (
-    <View>
-      <Text>Recipe screen</Text>
-      <Button
-        title="go back"
-        onPress={() => {
-          navigation.pop();
-        }}
-      />
-    </View>
-  );
+  const recipe: Recipe = navigation.getParam("recipe");
+
+  return <Text>{recipe.title}</Text>;
 };
 
-export default Recipe;
+RecipeScreen.navigationOptions = navigationProps => {
+  const recipe: Recipe = navigationProps.navigation.getParam("recipe");
+
+  return {
+    headerTitle: recipe.title,
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="Fav" iconName="ios-star" onPress={() => {}} />
+      </HeaderButtons>
+    )
+  };
+};
+
+export default RecipeScreen;
