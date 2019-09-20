@@ -3,7 +3,7 @@ export const defaultTheme = {
     black: "#333",
     gray: "#eee",
     main: "#4a148c",
-    secondary: "ff6f00",
+    secondary: "#ff6f00",
     white: "#fff"
   }
 };

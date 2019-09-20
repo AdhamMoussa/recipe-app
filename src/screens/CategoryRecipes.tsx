@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableHighlight, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { NavigationStackScreenComponent } from "react-navigation-stack";
 
 import RecipeItem from "../components/RecipeItem";
