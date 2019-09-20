@@ -11,7 +11,14 @@ import Recipe from "../screens/Recipe";
 
 import { defaultTheme } from "../utils/theme";
 
-const RecipesNavigator = createStackNavigator(
+const defaultStackOptions = {
+  headerStyle: {
+    backgroundColor: defaultTheme.colors.main
+  },
+  headerTintColor: defaultTheme.colors.white
+};
+
+const RecipesStackNavigator = createStackNavigator(
   {
     Categories: {
       screen: Categories
@@ -27,10 +34,23 @@ const RecipesNavigator = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: defaultTheme.colors.main
-      },
-      headerTintColor: defaultTheme.colors.white
+      ...defaultStackOptions
+    }
+  }
+);
+
+const FavoritesStackNavigator = createStackNavigator(
+  {
+    Favorites: {
+      screen: Favorites
+    },
+    Recipe: {
+      screen: Recipe
+    }
+  },
+  {
+    defaultNavigationOptions: {
+      ...defaultStackOptions
     }
   }
 );
@@ -38,7 +58,7 @@ const RecipesNavigator = createStackNavigator(
 const HomeTabsNavigator = createMaterialBottomTabNavigator(
   {
     Recipes: {
-      screen: RecipesNavigator,
+      screen: RecipesStackNavigator,
       navigationOptions: {
         tabBarIcon: tabInfo => (
           <Ionicons name="ios-restaurant" size={28} color={tabInfo.tintColor} />
@@ -46,7 +66,7 @@ const HomeTabsNavigator = createMaterialBottomTabNavigator(
       }
     },
     Favorites: {
-      screen: Favorites,
+      screen: FavoritesStackNavigator,
       navigationOptions: {
         tabBarIcon: tabInfo => (
           <Ionicons name="ios-star" size={28} color={tabInfo.tintColor} />

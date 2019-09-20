@@ -1,12 +1,27 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { View, FlatList } from "react-native";
+import { NavigationStackScreenComponent } from "react-navigation-stack";
 
-const Favorites: React.FC = () => {
-  return (
-    <View>
-      <Text>Favorites screen</Text>
-    </View>
-  )
-}
+import RecipeList from "../components/RecipeList";
 
-export default Favorites
+import { RECIPES } from "../data/dummy-data";
+import { Recipe } from "../models/recipe";
+
+const Favorites: NavigationStackScreenComponent = props => {
+  const { navigation } = props;
+
+  const navigateToRecipe = (recipe: Recipe): void => {
+    navigation.navigate({
+      routeName: "Recipe",
+      params: { recipe }
+    });
+  };
+
+  return <RecipeList recipes={RECIPES} navigateToRecipe={navigateToRecipe} />;
+};
+
+Favorites.navigationOptions = {
+  headerTitle: "Favorite Recipes"
+};
+
+export default Favorites;

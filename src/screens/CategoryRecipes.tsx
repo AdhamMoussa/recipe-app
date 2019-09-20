@@ -2,7 +2,7 @@ import React from "react";
 import { View, FlatList } from "react-native";
 import { NavigationStackScreenComponent } from "react-navigation-stack";
 
-import RecipeItem from "../components/RecipeItem";
+import RecipeList from "../components/RecipeList";
 
 import { CATEGORIES, RECIPES } from "../data/dummy-data";
 import { Recipe } from "../models/recipe";
@@ -23,17 +23,7 @@ const CategoryRecipes: NavigationStackScreenComponent = props => {
     });
   };
 
-  return (
-    <View>
-      <FlatList
-        data={recipes}
-        keyExtractor={({ id }) => id}
-        renderItem={({ item }) => (
-          <RecipeItem recipe={item} navigateToRecipe={navigateToRecipe} />
-        )}
-      />
-    </View>
-  );
+  return <RecipeList recipes={recipes} navigateToRecipe={navigateToRecipe} />;
 };
 
 CategoryRecipes.navigationOptions = navigationProps => {
