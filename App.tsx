@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { AppLoading } from "expo";
 import { useScreens } from "react-native-screens";
 
-import RecipesNavigator from "./src/navigation/RecipesNavigator";
+import MainNavigator from "./src/navigation";
 
 import { loadFonts } from "./src/utils/loadFonts";
-import { defaultTheme } from "./src/utils/theme";
 
 useScreens();
 
@@ -25,7 +24,7 @@ const App: React.FC = () => {
     );
   }
 
-  return <RecipesNavigator />;
+  return <MainNavigator />;
 };
 
 export default App;

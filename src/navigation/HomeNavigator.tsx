@@ -1,5 +1,4 @@
 import React from "react";
-import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,12 +10,7 @@ import Recipe from "../screens/Recipe";
 
 import { defaultTheme } from "../utils/theme";
 
-const defaultStackOptions = {
-  headerStyle: {
-    backgroundColor: defaultTheme.colors.main
-  },
-  headerTintColor: defaultTheme.colors.white
-};
+import { defaultStackOptions } from "./defaultConfigs";
 
 const RecipesStackNavigator = createStackNavigator(
   {
@@ -83,4 +77,4 @@ const HomeTabsNavigator = createMaterialBottomTabNavigator(
   }
 );
 
-export default createAppContainer(HomeTabsNavigator);
+export { HomeTabsNavigator };
